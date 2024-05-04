@@ -24,11 +24,14 @@ func (r Repository) AdminGetList(ctx context.Context, filter Filter) ([]AdminGet
 	whereQuery := "WHERE deleted_at IS NULL"
 	var limitQuery, offsetQuery string
 
-	if filter.CustomerID != nil {
-		whereQuery += fmt.Sprintf(" AND customer_id = %s", *filter.CustomerID)
+	if filter.CustomerName != nil {
+		whereQuery += fmt.Sprintf(" AND c.customer_name = %s", *filter.CustomerName)
 	}
-	if filter.ItemID != nil {
-		whereQuery += fmt.Sprintf(" AND item_id = %s", *filter.ItemID)
+	if filter.ItemName != nil {
+		whereQuery += fmt.Sprintf(" AND i.item_name = %s", *filter.ItemName)
+	}
+	if filter.Id != nil {
+		whereQuery += fmt.Sprintf(" AND id = %s", *filter.Id)
 	}
 
 	if filter.Limit != nil {

@@ -37,17 +37,23 @@ func (cl Controller) AdminGetTransactionViewList(c *gin.Context) {
 		filter.Offset = value
 	}
 
-	costumer_id, err := request.GetQuery(c, reflect.String, "costumer_id")
+	costumer_name, err := request.GetQuery(c, reflect.String, "costumer_name")
 	if err != nil {
 		fieldErrors = append(fieldErrors, *err)
-	} else if value, ok := costumer_id.(*string); ok {
-		filter.CustomerID = value
+	} else if value, ok := costumer_name.(*string); ok {
+		filter.CustomerName = value
 	}
-	item_id, err := request.GetQuery(c, reflect.String, "item_id")
+	item_name, err := request.GetQuery(c, reflect.String, "item_name")
 	if err != nil {
 		fieldErrors = append(fieldErrors, *err)
-	} else if value, ok := item_id.(*string); ok {
-		filter.ItemID = value
+	} else if value, ok := item_name.(*string); ok {
+		filter.ItemName = value
+	}
+	id, err := request.GetQuery(c, reflect.String, "id")
+	if err != nil {
+		fieldErrors = append(fieldErrors, *err)
+	} else if value, ok := id.(*string); ok {
+		filter.Id = value
 	}
 
 	if len(fieldErrors) > 0 {

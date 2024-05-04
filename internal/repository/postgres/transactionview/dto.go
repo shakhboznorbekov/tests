@@ -7,10 +7,11 @@ import (
 )
 
 type Filter struct {
-	Limit      *int
-	Offset     *int
-	CustomerID *string
-	ItemID     *string
+	Limit        *int
+	Offset       *int
+	CustomerName *string
+	ItemName     *string
+	Id           *string
 }
 
 type AdminGetListResponse struct {
