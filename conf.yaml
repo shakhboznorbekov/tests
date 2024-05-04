@@ -1,0 +1,8 @@
+base_url: "http://test.uz"
+default_lang: "uz"
+db_username: "admin"
+db_password: "2711"
+db_name: "tests"
+db_port: "5432"
+port: "8080"
+jwt_key: "tests"
