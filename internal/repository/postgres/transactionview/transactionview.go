@@ -41,8 +41,8 @@ func (r Repository) AdminGetList(ctx context.Context, filter Filter) ([]AdminGet
 	query := fmt.Sprintf(`
 		SELECT
 			id,
-			customer_id,
-			customer_name,
+			c.customer_name,
+			i.item_name,
 			qty,
 			price,
 			amount,
@@ -50,6 +50,8 @@ func (r Repository) AdminGetList(ctx context.Context, filter Filter) ([]AdminGet
 			item_id
 		FROM
 		    transactionviews
+		LEFT OUTER JOIN items as i ON i.id = transactionviews.item_id
+		LEFT OUTER JOIN customers as c ON c.id = transactionviews.customer_id
 		%s %s %s
 	`, whereQuery, limitQuery, offsetQuery)
 
@@ -76,6 +78,8 @@ func (r Repository) AdminGetList(ctx context.Context, filter Filter) ([]AdminGet
 	    COUNT(*)
 	FROM
 		transactionviews
+	LEFT OUTER JOIN items as i ON i.id = transactionviews.item_id
+	LEFT OUTER JOIN customers as c ON c.id = transactionviews.customer_id
 	%s
 	`, whereQuery)
 	countRows, er := r.QueryContext(ctx, countQuery)
